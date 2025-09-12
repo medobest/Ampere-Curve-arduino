@@ -36,14 +36,14 @@ Make sure you install these Arduino libraries:
 ## 🎛️ Controls & Modes
 
 ### 🔋 Voltage Button
-- Displays the measured **voltage values** on the TFT screen.  
+- Displays the measured **current values** on the TFT screen.  
 - Useful for checking real-time readings separately from current.
 
 ### 📜 Session Log
 - Switches the display to show the **saved session data** (historical measurements).  
-- Allows reviewing previous current/voltage behavior.
+- Allows reviewing previous current behavior.
 
-### ▶️ Return to Live Mode
+### ▶️ Return to Live Mode (Voltage Button-second click)
 - Exits the session log view.  
 - Resumes **real-time monitoring** and graph plotting.
 
