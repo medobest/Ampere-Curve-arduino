@@ -40,7 +40,7 @@ const long interval = 1000;
 // ===================== Sensor Pins =====================
 const int Vpin = A6;
 const int Ipin = A5;
-ACS712XX ACS712(ACS712_05B, Ipin);
+ACS712XX ACS712(ACS712_05B, Ipin); //here change your sensor model( 5A , 20A , 30A)
 
 // ===================== Variables =====================
 int vx, ix;
