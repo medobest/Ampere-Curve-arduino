@@ -3,7 +3,7 @@
 This project displays and graphs the **current (A)** and **voltage (V)** in real time using an Arduino, a **3.5" TFT display**, and an **ACS712 current sensor**.  
 It can be used for monitoring power consumption, testing circuits, and visualizing load behavior.  
 
-![Demo Screenshot](Demo.jpg)
+![Demo Screenshot](/images/Demo.jpg)
 
 ---
 
