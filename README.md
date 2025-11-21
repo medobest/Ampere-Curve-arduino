@@ -5,122 +5,150 @@ It can be used for monitoring power consumption, testing circuits, and visualizi
 
 ![Demo Screenshot](/images/Demo.jpg)
 
+## 📌 Overview
 
-A real-time current and voltage grapher based on Arduino, designed for visualizing electrical load behavior in a live, intuitive way.
+**Ampere Curve Grapher** is an Arduino-powered measurement tool that displays and graphs electrical current (A) and voltage (V) in real time. It provides a clean UI, dynamic graphing, and session logging—ideal for testing circuits, analyzing load changes, and monitoring power consumption.
 
-Overview
+---
 
-The Ampere Curve Grapher is a lightweight, embedded measurement system that displays and graphs electric current (A) and voltage (V) in real time using an Arduino microcontroller, a 3.5″ TFT screen, and an ACS712 current sensor. It’s especially useful for monitoring power consumption, analyzing circuit dynamics, and visualizing how current changes over time under varying loads.
+## ⭐ Features
 
-Key Features
+* **Live Amp & Volt Measurement**
+  Continuously measures current (ACS712) and voltage via a divider.
 
-Real-Time Monitoring: Instantaneous measurement of current and voltage, updated continuously on the TFT display.
+* **Real-Time Curve Graph**
+  Plots current values over time with smooth, automatic visualization.
 
-Graphical Plotting: A dynamically updating curve plots current (amperes) over time, allowing you to see how the load is behaving moment-to-moment.
+* **Auto Y-Scaling**
+  Graph height adjusts automatically depending on the range of measured values.
 
-Digital Readouts: In addition to the graph, the system shows numerical values of current (A) and voltage (V) for precise readings.
+* **Digital Values Display**
+  Shows exact readings of voltage and current alongside the graph.
 
-Auto-Scaling Y-Axis: The graph’s vertical scale automatically adjusts to the range of measured values, optimizing visualization without manual adjustments.
+* **Session Logging Mode**
+  Records a measurement run and lets you review the entire amp curve after capturing it.
 
-Session Logging: You can record a “session” of measurements and review historical data (current curve) on-screen.
+* **Dedicated Controls on TFT**
 
-Simple, Clean UI: A user interface with clear labels, a graph area, and navigational buttons ensures the experience is intuitive.
+  * **Voltage Mode**: Show voltage reading alone
+  * **Log Mode**: Switch to session history view
+  * **Reset**: Clear graph + log and start fresh
 
-Control Buttons:
+* **Simple & Clean UI**
+  Optimized layout with curve area, labels, buttons, and real-time refresh.
 
-Voltage Button: Toggle to display the voltage reading only, useful for focusing on voltage independently.
+---
 
-Session Log Mode: Switch from real-time view to a stored session graph to inspect data history.
+## 🧩 Hardware Requirements
 
-Reset Button: Clear both live data and saved session log to begin a fresh measurement run.
+* Arduino UNO / MEGA / compatible board
+* 3.5″ TFT LCD (MCUFRIEND / ILI9486 supported)
+* ACS712 current sensor (5A / 20A / 30A versions)
+* Voltage divider resistors
+* Wires / breadboard or PCB
 
-Hardware Components
+---
 
-Microcontroller: Arduino UNO, Arduino MEGA, or any compatible board.
+## 📚 Software Requirements
 
-Display: 3.5″ TFT LCD (MCUFRIEND or ILI9486 driver).
+Install these Arduino libraries:
 
-Current Sensor: ACS712 (supported versions: 5 A, 20 A, 30 A).
+* `Adafruit_GFX`
+* `MCUFRIEND_kbv`
+* `ACS712` library
+* Arduino IDE (latest recommended)
 
-Voltage Sensing: A voltage divider circuit to safely scale down high voltages for measurement by the Arduino.
+---
 
-Other: Jumper wires, optionally a breadboard or custom PCB.
+## 🔧 How It Works
 
-Software / Libraries Required
+1. The ACS712 outputs an analog voltage proportional to current.
+2. Arduino reads this + voltage readings from the divider.
+3. Values are converted into amps/volts.
+4. The graph is drawn continuously while showing digital readings.
+5. The session log records data points, which can be replayed later on-screen.
+6. Buttons allow toggling displays and clearing data.
 
-Adafruit GFX — for basic graphics primitives.
+---
 
-MCUFRIEND_kbv — to drive the 3.5″ TFT display.
+## 📈 Applications
 
-ACS712 Current Sensor Library — to interface with the current sensor and convert analog readings to amperes.
+* Load testing for electronics
+* Power consumption analysis
+* Educational demonstrations
+* Prototype debugging
+* Visualizing current fluctuations
+* Monitoring device behavior over time
 
-How It Works
+---
 
-The ACS712 sensor produces an analog voltage proportional to current passing through it.
+## 🎛 Calibration
 
-The Arduino reads that analog value, converts it to a current reading using calibration, and simultaneously measures voltage via the voltage divider.
+* **Current**: Adjust ACS712 offset & sensitivity in code
+* **Voltage**: Set correct voltage divider ratio
+* Perform calibration with a known multimeter reading for accuracy
 
-The firmware plots these measurements over time on the TFT as a curve, while also updating digital readouts.
+---
 
-When you hit the “Session Log” button, the system switches to log mode, replaying the recorded curve so you can analyze how current has evolved during that recording session.
+## ⚠ Notes & Limitations
 
-Hitting “Reset” clears existing data, letting you start fresh.
+* ACS712 has limited ranges (5A/20A/30A depending on module)
+* Accuracy improves with filtering and proper sensor calibration
+* Very long logs may consume Arduino RAM
+* Graph update speed is limited by MCU + TFT refresh rate
 
-Use Cases / Applications
+---
 
-Power Consumption Monitoring: Track how much current a device draws over time under different operating conditions.
+## 🧱 Schematic (Conceptual)
 
-Circuit Testing: Analyze transient behavior and load response when switching loads on/off or changing load magnitude.
+* ACS712 → Arduino analog pin
+* Voltage Divider → Arduino analog pin
+* TFT (parallel interface) → Arduino digital pins
+* Power supply → Sensor + load (rated accordingly)
 
-Educational Tool: Demonstrate to students or hobbyists how current varies, how a sensor like ACS712 works, and how to plot data in embedded systems.
+*(I can draw a full wiring diagram too if you want.)*
 
-Prototyping & Debugging: Use in hardware development to validate current draw and verify that designs stay within safe electrical limits.
+---
 
-Calibration & Accuracy
+## 🔮 Future Enhancements
 
-The system supports calibration of the ACS712 sensor to improve measurement accuracy (by adjusting offset and sensitivity values).
+* SD card logging (CSV)
+* Multi-channel current tracking
+* Wi-Fi or Bluetooth live streaming
+* Threshold alerts (overcurrent alarms)
+* Touch UI upgrades
+* Built-in calibration wizard
+* Smoother graph interpolation
 
-Voltage divider must be designed carefully: resistor values and division ratio directly affect measured accuracy, especially at higher voltages.
+---
 
-Sampling rate and filtering: The code includes a smoothing or filtering mechanism (if implemented) to reduce noise in readings, improving visual and numerical stability.
+## 📦 Project Structure
 
-Limitations / Considerations
+```
+/Ampere-Curve-arduino
+│
+├── SerbiousVoltAmpFINREFINED.ino   # Main firmware
+├── /libraries                      # Required libraries (optional copy)
+└── README.md                       # Documentation
+```
 
-Sensor Limits: The ACS712 has a limited current range depending on the model (5A, 20A, 30A). Exceeding this may damage the sensor or distort readings.
+---
 
-Voltage Range: The voltage measurement is limited by the divider design and Arduino’s analog input voltage range (0–5V for many boards).
+## 🤝 Contributions
 
-Memory Constraints: Depending on the Arduino model and how you store session data, very long sessions may run out of RAM.
+Pull requests and feature suggestions are welcome.
 
-Display Refresh Rate: The TFT screen and MCU speed impose practical limits on how fast the graph can update.
+---
 
-Noise & Accuracy: Without filtering, analog readings may be noisy. Proper calibration and smoothing help, but there are inherent analog-to-digital conversion limitations.
+## 📜 License
 
-Future Enhancements
+Include your preferred license here (MIT recommended).
 
-Here are some possible directions to expand or improve the project:
+---
 
-Logging to External Storage: Save session data to an SD card or external memory for later analysis.
-
-Exporting Data: Enable CSV export via serial, USB, or over Wi-Fi / Bluetooth.
-
-Higher Resolution Graphing: Use more sampling, oversampling, or temporal interpolation to get smoother curves.
-
-Multiple Channels: Support multiple current sensors to graph several loads simultaneously.
-
-Wireless Monitoring: Integrate a Wi-Fi / Bluetooth module (e.g., ESP8266 / ESP32) to stream measurements to a PC or mobile app.
-
-Alert System: Add threshold-based alerts (e.g., when current exceeds a safety value).
-
-Improved UI / UX: Add menus, touch support (if TFT is touch-enabled), or more visual themes.
-
-Calibration Wizard: Provide a built-in calibration routine that tests sensor offset and gain automatically.
-
-Bill of Materials (BOM)
-Item	Description
-Arduino Board	UNO, MEGA, or compatible
-TFT Display	3.5″ MCUFRIEND / ILI9486
-Current Sensor	ACS712 (5A / 20A / 30A)
-Resistors	For the voltage divider (values depend on input voltage)
-Wires	Jumper cables or PCB traces
-Power Supply	Appropriate to your load and Arduino
+If you want, I can also:
+✅ Add a **GIF demo** description
+✅ Create a professional **project banner image**
+✅ Draw a **schematic diagram**
+✅ Rewrite in **Arabic**
+Just tell me!
