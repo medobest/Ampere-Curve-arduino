@@ -106,7 +106,7 @@ Install these Arduino libraries:
 * TFT (parallel interface) → Arduino digital pins
 * Power supply → Sensor + load (rated accordingly)
 
-*(I can draw a full wiring diagram too if you want.)*
+*---------------------------------------------------------*
 
 ---
 
@@ -137,12 +137,6 @@ Install these Arduino libraries:
 ## 🤝 Contributions
 
 Pull requests and feature suggestions are welcome.
-
----
-
-## 📜 License
-
-Include your preferred license here (MIT recommended).
 
 ---
 
